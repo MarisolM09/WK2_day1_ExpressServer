@@ -24,7 +24,7 @@ app.get('/users', (req, res) => res.json(users));
 
 // Gets 1 user
 app.get('/users/:id', (req, res) => {
-  res.json(users.filter(user => user.id === parseInt(req.params.id)))
+  res.json(users.filter(user => user._id === parseInt(req.params.id)))
 });
 
 
@@ -43,8 +43,8 @@ app.post('/users', (req, res) => {
 app.put('/users/:id', (req, res) => {
   let id = +req.params.id;
   let body = req.body;
-  let index = users.findIndex((user) => user.id === id);
-  let updatedUser = { id: id, ...body };
+  let index = users.findIndex((user) => user._id === id);
+  let updatedUser = { _id: id, ...body };
   users[index] = updatedUser;
   res.send(updatedUser)
 });
@@ -52,7 +52,7 @@ app.put('/users/:id', (req, res) => {
 // Delete User
 app.delete('/users/:id', (req, res) => {
   let id = +req.params.id;
-  let index = users.findIndex((user) => user.id === id);
+  let index = users.findIndex((user) => user._id === id);
   let deletedUser = users.splice(index, 1);
   res.send(deletedUser);
   

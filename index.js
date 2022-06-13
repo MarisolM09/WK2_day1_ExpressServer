@@ -43,11 +43,18 @@ app.post('/users', (req, res) => {
 app.put('/users/:id', (req, res) => {
   let id = +req.params.id;
   let body = req.body;
+  let index = users.findIndex((user) => user.id === id);
+  let updatedUser = { id: id, ...body };
+  users[index] = updatedUser;
+  res.send(updatedUser)
 });
 
 // Delete User
 app.delete('/users/:id', (req, res) => {
-  
+  let id = +req.params.id;
+  let index = users.findIndex((user) => user.id === id);
+  let deletedUser = users.splice(index, 1);
+  res.send(deletedUser);
   
 });
 
